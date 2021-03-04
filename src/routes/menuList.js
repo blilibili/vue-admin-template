@@ -1,4 +1,5 @@
 import Home from '../page/home'
+import Company from '../page/company'
 
 // mock 权限大全
 const permission = ['home:index', 'company:index', 'company:admin', 'company:cuture', 'order:index']
@@ -21,7 +22,8 @@ const menuList = [
         permission: 'company:admin',
         name: '企业管理',
         title: '企业管理',
-        path: '/company'
+        path: '/company',
+        component: Company
       },
       {
         permission: 'company:cuture',
