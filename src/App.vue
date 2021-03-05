@@ -41,4 +41,12 @@ html, body {
     width: 210px;
     height: 100%;
 }
+/*隐藏文字*/
+.el-menu--collapse  .el-submenu__title span{
+    display: none;
+}
+/*隐藏 > */
+.el-menu--collapse  .el-submenu__title .el-submenu__icon-arrow{
+    display: none;
+}
 </style>

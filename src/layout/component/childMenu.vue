@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div >
         <template v-for="(item, index) in menuList">
-            <el-submenu :index="`${index}${item.title}`" v-if="item.children && item.children.length > 0">
-                <i slot="title" :class="item.icon"></i>
-                <span slot="title">{{item.title}}</span>
+            <el-submenu :index="`${index}${item.title}`" v-if="item.children && item.children.length > 0" :key="`${index}${item.title}`">
+                <template slot="title">
+                    <i slot="title" :class="item.icon"></i>
+                    <span slot="title">{{item.title}}</span>
+                </template>
                 <child-menu :menu-list="item.children" />
             </el-submenu>
 
