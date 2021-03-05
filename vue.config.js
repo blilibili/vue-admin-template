@@ -31,25 +31,25 @@ module.exports={
   },
   // 代理服务器配置
   devServer: {
-    open: true,
-    hot: true,
-    host: '0.0.0.0', // 指定要使用的主机。如果您希望您的服务器可以在外部访问
-    port: 80,
-    proxy: {            // PROXY_API的请求会将请求代理到http://10.130.131.30:5004/。 如果您不想/PROXY_API被传递，我们需要重写路径
-      [`/${PROXY_API}`]: {
-        target: 'http://10.130.131.30:5004', // 源地址 sit
-        changeOrigin: false,
-        xfwd: true,
-        autoRewrite: true,
-        pathRewrite: {
-          [`^/${PROXY_API}`]: ''
-        }
-      },
-      '/product': {
-        target: 'http://10.130.36.167:4002',
-        changeOrigin: true
-      }
-    },
+    // open: true,
+    // hot: true,
+    // host: '0.0.0.0', // 指定要使用的主机。如果您希望您的服务器可以在外部访问
+    // port: 80,
+    // proxy: {            // PROXY_API的请求会将请求代理到http://10.130.131.30:5004/。 如果您不想/PROXY_API被传递，我们需要重写路径
+      // [`/${PROXY_API}`]: {
+      //   target: '', // 源地址 sit
+      //   changeOrigin: false,
+      //   xfwd: true,
+      //   autoRewrite: true,
+      //   pathRewrite: {
+      //     [`^/${PROXY_API}`]: ''
+      //   }
+      // },
+      // '/product': {
+      //   target: 'http://10.130.36.167:4002',
+      //   changeOrigin: true
+      // }
+    // },
     // mock data
     contentBase: path.join(__dirname, 'public'), // devServer里面的contentBase表示的是告诉服务器从哪里提供内容
     compress: true, // 对所有服务启用gzip压缩

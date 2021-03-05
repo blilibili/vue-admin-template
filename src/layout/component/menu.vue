@@ -10,25 +10,7 @@
                     class="el-menu-vertical-demo"
                     @open="handleOpen"
                     @close="handleClose">
-                <template v-for="(item, index) in menuList">
-                    <el-submenu :index="'null'" v-if="item.children && item.children.length > 0">
-                        <template slot="title">
-                            <i :class="item.icon"></i>
-                            <span slot="title">{{item.title}}</span>
-                        </template>
-                        <template v-for="(idx, key) in item.children">
-                            <el-menu-item :index="idx.path">
-                                <i :class="idx.icon"></i>
-                                <span slot="title">{{idx.title}}</span>
-                            </el-menu-item>
-                        </template>
-                    </el-submenu>
-
-                    <el-menu-item :index="item.path" v-else>
-                        <i :class="item.icon"></i>
-                        <span slot="title">{{item.title}}</span>
-                    </el-menu-item>
-                </template>
+                <childMenu :menu-list="menuList" />
             </el-menu>
         </el-col>
     </el-row>
@@ -36,24 +18,26 @@
 
 <script>
   import {menuList} from '@src/routes/menuList'
+  import {routes} from '@src/routes/routes'
+  import childMenu from "./childMenu";
   export default {
     name: "MyMenu",
+    components: {
+      childMenu
+    },
     data() {
       return {
         isCollapse: false,
         menuList: menuList,
-        otherMenuList: []
+        otherMenuList: [],
+        routes: routes
       }
     },
     mounted() {
-      this.otherMenuList = []
-      this.menuListForOne(this.menuList)
-      const routes = this.otherMenuList.filter((result) => {
-        return result.path === this.$route.path
-      })[0]
-      if(routes) {
-        this.$emit('pushRouter', routes)
-      }
+      this.$bus.$on('pushHistoryNav', (msg) => {
+        this.pushHistoryRoutes(msg)
+      })
+      this.pushHistoryRoutes(this.$route.path)
     },
     methods: {
       handleOpen() {
@@ -71,22 +55,28 @@
           }
         })
       },
+      pushHistoryRoutes(path) {
+        const routes = this.routes.routes[0].children.filter((result) => {
+          return result.path === path
+        })[0]
+
+        if(!routes.title) {
+          routes.title = routes.name
+        }
+        if(routes) {
+          this.$emit('pushRouter', routes)
+        }
+      },
       selectionChildMenu(index, paths) {
         this.otherMenuList = []
         const path = paths[paths.length-1]
         if(path === null) {
           return
         }
-
-        this.menuListForOne(this.menuList)
-        const routes = this.otherMenuList.filter((result) => {
-          return result.path === path
-        })[0]
-        console.log(routes)
-        if(routes) {
-          this.$emit('pushRouter', routes)
-        }
-        this.$router.push(path)
+        let basePath = this.$route.matched[0].path
+        console.log(path)
+        this.pushHistoryRoutes(basePath+path)
+        this.$router.push(routes.routes[0].path + path)
       }
     }
   }

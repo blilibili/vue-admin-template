@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-      <mainSkeleton>
-          <template v-slot:skeleton-body>
-              <router-view></router-view>
-          </template>
-      </mainSkeleton>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import mainSkeleton from "./layout/mainSkeleton"
+import {router} from "./routes/routes";
 export default {
   name: 'App',
   components: {
-    mainSkeleton
+
+  },
+  mounted() {
+    this.$router.beforeEach((to, from, next) => {
+      this.$bus.$emit('pushHistoryNav', to.path)
+      next()
+    })
   }
 }
 </script>

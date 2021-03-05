@@ -1,24 +1,28 @@
-# vue-admin-template
+# 管理后台模板  基于 vue + element + axios 搭建
 
-## Project setup
+## 项目依赖安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 启动服务
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 编译
 ```
 npm run build
 ```
 
-### Lints and fixes files
+# 目录介绍
 ```
-npm run lint
+.env 环境变量  可将变量打包到代码里
+vue.config  项目配置  重要的是devServer  可以解决开发时跨域问题
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# 重要配置
+```
+--src -> routes ->  menuList 左侧菜单栏的配置，自动写入到路由 无须再次引用， 菜单里需要引入组件，否则默认的错误提示组件
+--src -> routes ->  serve  业务路由，配置跳转路由，会自动加载到routes
+```
