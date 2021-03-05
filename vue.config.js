@@ -5,7 +5,7 @@ function resolve (dir) {
   return path.join(__dirname, dir);
 }
 module.exports={
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/', // 生产环境使用相对路径，开发环境使用根路径
+  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/', // 生产环境使用相对路径，开发环境使用根路径
   outputDir: 'dist', // 当运行 vue-cli-service build 时生成的生产环境构建文件的目录，默认为dist目录
   lintOnSave: process.env.NODE_ENV !== 'production', // 在生产构建时禁用 eslint-loader
   productionSourceMap: false, // 不需要生产环境的 source map,加速打包速度

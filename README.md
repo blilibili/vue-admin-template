@@ -25,4 +25,13 @@ vue.config  项目配置  重要的是devServer  可以解决开发时跨域问�
 ```
 --src -> routes ->  menuList 左侧菜单栏的配置，自动写入到路由 无须再次引用， 菜单里需要引入组件，否则默认的错误提示组件
 --src -> routes ->  serve  业务路由，配置跳转路由，会自动加载到routes
+--src -> routes -> other  其他路由 不在骨架里的页面  例如 登录
 ```
+
+# todo
+```
+公司logo的配置，常用登录页面，拖拽生成登录页面代码, 收缩问题
+```
+
+# demo
+http://120.48.8.131:82/base/cuture
