@@ -1,9 +1,9 @@
 import login from "../../page/login";
 const loginRoutes = [
   {
-    name: '测试',
+    name: '登录',
     path: "/login",
-    title: '测试',
+    title: '登录',
     component: login
   }
 ]

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <el-card class="box-card">
+        <el-card class="box-card" style="width: 400px;">
             <div slot="header" class="clearfix">
                 <span>登录</span>
             </div>
@@ -11,6 +11,10 @@
                     </el-form-item>
                     <el-form-item label="密码">
                         <el-input v-model="users.pass" type="password"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="">
+                        <el-button @click="goToLogin">登录</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -27,6 +31,11 @@
           name: '',
           pass: ''
         }
+      }
+    },
+    methods: {
+      goToLogin() {
+        this.$router.push('/base/home')
       }
     }
   }

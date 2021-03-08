@@ -7,9 +7,10 @@
                 v-for="(tag, index) in history"
                 :key="tag.title"
                 closable
-                effect="plain"
+                type="success"
+                effect="dark"
                 size="small"
-                :type="tag.type">
+        >
             {{tag.title}}
         </el-tag>
     </div>

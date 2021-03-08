@@ -3,7 +3,7 @@
         <div class="left-menu-container">
             <MyMenu ref="menuRef" @pushRouter="pushRouterMethods" />
         </div>
-        <div class="right-content-container" :style="{width:`${rightWidth}px`}">
+        <div class="right-content-container" :style="{width:`calc(100% - ${headerWidth}px)`}">
             <MyHeader @openOrHideMenu="openOrHideMenuMethods" />
             <HistoryNav :history="history" @delHistoryTagEmit="delHistoryTagCallBack" />
             <div class="right-content-container-slot">
