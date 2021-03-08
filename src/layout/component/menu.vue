@@ -56,7 +56,6 @@
         })
       },
       pushHistoryRoutes(path) {
-        console.log(path)
         const routes = this.routes.routes[0].children.filter((result) => {
           return result.path === path
         })[0]
@@ -75,7 +74,7 @@
           return
         }
         let basePath = this.$route.matched[0].path
-        this.pushHistoryRoutes(basePath+path)
+        // this.pushHistoryRoutes(basePath+path)
         this.$router.push(routes.routes[0].path + path)
       }
     }
