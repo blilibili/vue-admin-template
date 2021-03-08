@@ -1,8 +1,9 @@
 import Home from '../page/home'
 import Company from '../page/company'
+import CreateCode from '../components/CreateCode/index'
 
 // mock 权限大全
-const permission = ['home:index', 'company:index', 'company:admin', 'company:cuture', 'order:index', 'list:admin']
+const permission = ['home:index', 'company:index', 'company:admin', 'company:cuture', 'order:index', 'list:admin', 'auto:index', 'auto:create']
 
 const menuList = [
   {
@@ -48,6 +49,22 @@ const menuList = [
         title: '订单列表',
         icon: 'el-icon-view',
         path: '/list'
+      }
+    ]
+  },
+  {
+    name: '自动化',
+    title: '自动化',
+    permission: 'auto:index',
+    icon: 'el-icon-suitcase',
+    children: [
+      {
+        permission: 'auto:create',
+        name: '创建代码',
+        title: '创建代码',
+        icon: 'el-icon-table-lamp',
+        path: '/code',
+        component: CreateCode
       }
     ]
   }
