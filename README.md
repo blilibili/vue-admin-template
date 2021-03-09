@@ -30,7 +30,7 @@ vue.config  项目配置  重要的是devServer  可以解决开发时跨域问�
 
 # todo
 ```
-公司logo的配置，拖拽生成表单页面代码 基于 element
+公司logo的配置，拖拽生成表单页面代码(完成 input select) 基于 element
 ```
 
 # demo

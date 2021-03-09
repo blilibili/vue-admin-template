@@ -81,6 +81,11 @@
             type: 'input'
           },
           {
+            label: '下拉框',
+            eng: 'Select',
+            type: 'select'
+          },
+          {
             label: '文本',
             eng: 'Text',
             type: 'text'
