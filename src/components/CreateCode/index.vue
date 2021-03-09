@@ -33,7 +33,7 @@
                     </el-form-item>
 
                     <el-form-item label="options" v-if="componentType === 'select'">
-                        options: {{JSON.stringify(selectionOptionsArr)}}
+                        {{JSON.stringify(selectionOptionsArr)}}
                         <el-button size="mini" @click="addNewSelectOptions">新增</el-button>
                     </el-form-item>
                 </el-form>
@@ -96,12 +96,7 @@
     },
     data() {
       return {
-        selectionOptionsArr: [
-          {
-            label: '',
-            value: ''
-          }
-        ],
+        selectionOptionsArr: [],
         addOptions: false,
         formAttrObj: {
           col: '',
@@ -153,6 +148,9 @@
         this.selectionOptionsArr.push(addObj)
       },
       addNewSelectOptions() {
+        if(this.selectionOptionsArr.length === 0) {
+          this.addNewOptions()
+        }
         this.addOptions = true
       },
       createCodeByArr() {
@@ -161,9 +159,14 @@
       },
       activedComponentByIndexMethods(msg) {
         const {row, index} = msg
+
         Object.keys(this.attributeObj).forEach((key) => {
           this.attributeObj[key] = row[key]
         })
+        if(row.options) {
+          this.selectionOptionsArr = row.options
+        }
+        console.log(row.options)
         this.componentType = row.type
         this.activeComponent = index
       },
@@ -179,8 +182,11 @@
             label: '标签'
         }
 
-        if(msg.type === 'select') {
-          codeObj.options = []
+        if(msg.target.dataset.type === 'select') {
+          codeObj.options = [{
+            label: '',
+            value: ''
+          }]
         }
 
         // 先默认第一个是表单  暂时没有想到拖拽嵌套应该怎么写
