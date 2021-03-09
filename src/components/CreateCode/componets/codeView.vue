@@ -1,8 +1,14 @@
 <template>
     <div class="code-viewer">
         <div v-for="(item, index) in activeComponentList">
-            <el-form v-if="item.type === 'form'" ref="form" :model="form" label-width="80px">
+            <el-form v-if="item.type === 'form' && rowsAttrConfig.col === ''" :style="`height: ${item.height}px;`" ref="form" :model="form" label-width="80px">
+                <codeView @test="testmethods" v-if="item.children && item.children.length > 0" :rows-attr-config="rowsAttrConfig" :active-component-list="item.children" />
+            </el-form>
 
+            <el-form v-else-if="item.type === 'form' && rowsAttrConfig.col !== ''" :inline="true" :model="form" class="demo-form-inline">
+                <el-row>
+                    <codeView @test="testmethods" v-if="item.children && item.children.length > 0" :rows-attr-config="rowsAttrConfig" :active-component-list="item.children" />
+                </el-row>
             </el-form>
 
             <div v-else-if="item.type === 'text'">
@@ -10,7 +16,23 @@
             </div>
 
             <div v-else-if="item.type === 'input'">
-                <el-input type="text"></el-input>
+                <el-col v-if="rowsAttrConfig.col !== ''" :span="parseInt(24 / rowsAttrConfig.col, 10)">
+                    <el-form-item :label="item.label">
+                        <el-input
+                                @blur="activedCurrentComponent(item, index)"
+                                type="text"
+                                :style="{width: item.width.toString().indexOf('%') !== -1 ?`${item.width}`:`${parseInt(item.width, 10)}px`}"
+                        ></el-input>
+                    </el-form-item>
+                </el-col>
+
+                <el-form-item v-else :label="item.label">
+                    <el-input
+                            @blur="activedCurrentComponent(item, index)"
+                            type="text"
+                            :style="{width: item.width.toString().indexOf('%') !== -1?`${item.width}`:`${parseInt(item.width, 10)}px`}"
+                    ></el-input>
+                </el-form-item>
             </div>
         </div>
     </div>
@@ -20,6 +42,14 @@
   export default {
     name: "codeView",
     props: {
+      rowsAttrConfig: {
+        type: Object,
+        default: () => {
+          return {
+            col: ''
+          }
+        }
+      },
       activeComponentList: {
         type: Array,
         default: () => []
@@ -31,14 +61,18 @@
 
         }
       }
+    },
+    methods: {
+      testmethods() {
+        console.log('介绍')
+      },
+      activedCurrentComponent(row, index) {
+        this.$bus.$emit('activedComponentByIndex', {row: row, index: index})
+      }
     }
   }
 </script>
 
 <style scoped>
-    .code-viewer{
-        min-height: 650px;
-        width: 375px;
-        border: 1px solid lightgray;
-    }
+
 </style>
