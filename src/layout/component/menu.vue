@@ -2,7 +2,7 @@
     <el-row class="tac menu-container">
         <el-col :span="24" style='height: 100%;'>
             <el-menu
-                    :default-active="$route.path"
+                    :default-active="activeMenu"
                     :collapse="isCollapse"
                     background-color="#304156"
                     text-color="rgb(191, 203, 217)"
@@ -27,6 +27,7 @@
     },
     data() {
       return {
+        activeMenu:'',
         isCollapse: false,
         menuList: menuList,
         otherMenuList: [],
@@ -37,6 +38,8 @@
       this.$bus.$on('pushHistoryNav', (msg) => {
         this.pushHistoryRoutes(msg)
       })
+      let basePath = this.$route.matched[0].path
+      this.activeMenu = this.$route.path.replace(`${basePath}`, '')
       this.pushHistoryRoutes(this.$route.path)
     },
     methods: {
@@ -75,6 +78,7 @@
         }
         let basePath = this.$route.matched[0].path
         // this.pushHistoryRoutes(basePath+path)
+        this.activeMenu = path
         this.$router.push(routes.routes[0].path + path)
       }
     }
